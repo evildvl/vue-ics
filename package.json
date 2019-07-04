@@ -1,15 +1,37 @@
 {
   "name": "vue-ics",
+  "description": "Vue.js plugin for generating ICalendar (.ics) files.",
   "version": "0.1.0",
-  "private": true,
+  "author": "Stanislav Mihaylov <ceo@pepper.llc>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evildvl/vue-ics.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "demo": "vue-cli-service demo",
+    "docs": "npm run docs:serve",
+    "docs:build": "vue-cli-service docs --mode build",
+    "docs:serve": "vue-cli-service docs --mode serve",
+    "prepublish": "vue-cli-service lint && vue-cli-service docs --mode build && vue-cli-service build",
+    "start": "vue-cli-service serve"
   },
+  "main": "dist/vue-ics.common.js",
+  "module": "dist/vue-ics.esm.js",
+  "unpkg": "dist/vue-ics.umd.min.js",
+  "files": [
+    "dist/vue-ics.common.js",
+    "dist/vue-ics.umd.min.js",
+    "dist/vue-ics.umd.js",
+    "dist/vue-ics.esm.js",
+    "src"
+  ],
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "file-saver": "^2.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
@@ -18,7 +40,9 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-cli-plugin-p11n": "^0.3.0",
+    "vue-template-compiler": "^2.6.10",
+    "vue": "^2.6.10"
   },
   "eslintConfig": {
     "root": true,
@@ -42,5 +66,7 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "jsdelivr": "dist/vue-ics.umd.min.js",
+  "sideeffects": false
 }
