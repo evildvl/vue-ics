@@ -1,5 +1,5 @@
 /*!
- * vue-ics v0.1.0 
+ * vue-ics v0.1.1 
  * (c) 2019 Stanislav Mihaylov <ceo@pepper.llc>
  * Released under the MIT License.
  */
@@ -9,7 +9,7 @@
   (global = global || self, global.VueIcs = factory(global.fileSaver));
 }(this, function (fileSaver) { 'use strict';
 
-  var version = '0.1.0';
+  var version = '0.1.1';
   /**
    * Reccurence rule
    * @typedef {Object} RRule

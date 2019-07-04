@@ -5,7 +5,6 @@
     <a @click="save()">Download</a>
   </div>
 </template>
-
 <script>
 export default {
   name: 'demo',
@@ -32,13 +31,18 @@ export default {
       until: until,
       interval: 1
     }
-    this.$ics.addEvent('ru-ru', 'Test event subject', 'Test event description', 'online', start, end, rrule)
+    this.$ics.addEvent('ru-ru', 'Test event subject', 'Test event description', 'online', start, end, "http://test.com" ,rrule)
     this.cal = this.$ics.calendar()
   }
 }
 </script>
-
 <style>
+  #app {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
   pre {
     text-align: left;
   }
