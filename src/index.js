@@ -2,7 +2,6 @@ import { saveAs } from 'file-saver'
 const version = '__VERSION__'
 
 //TODO: add members https://www.kanzaki.com/docs/ical/member.html
-//TODO: add organizerhttps://www.kanzaki.com/docs/ical/organizer.html (email only support)
 
 /**
  * Reccurence rule
@@ -96,11 +95,12 @@ const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
      * @param  {string} location    Location of event
      * @param  {string} begin       Beginning date of event
      * @param  {string} stop        Ending date of event
-     * @param  {string} url			URL
+     * @param  {string} url			    URL
+     * @param  {object} organizer   Organizer
      * @param  {RRule}  rrule       Reccurence rule
      * @returns {string} event
      **/
-    addEvent: (language = 'en-us', subject, description, location, begin, stop, url = null, rrule = null) => {
+    addEvent: (language = 'en-us', subject, description, location = 'none', begin, stop, url = null, organizer = null, rrule = null) => {
       let rruleString
 
       if (typeof subject === 'undefined' ||
@@ -168,6 +168,7 @@ const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
     DTSTART;VALUE=DATE-TIME:${start}
     DTEND;VALUE=DATE-TIME:${end}
     LOCATION:${location}
+    ${(organizer) ? 'ORGANIZER;CN=' + organizer.name + ':MAILTO:' + organizer.email : ''}
     SUMMARY;LANGUAGE=${language}:${subject}
     END:VEVENT
       `

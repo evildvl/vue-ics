@@ -1,5 +1,5 @@
 /*!
- * vue-ics v0.1.1 
+ * vue-ics v0.1.2 
  * (c) 2019 Stanislav Mihaylov <ceo@pepper.llc>
  * Released under the MIT License.
  */
@@ -9,7 +9,9 @@
   (global = global || self, global.VueIcs = factory(global.fileSaver));
 }(this, function (fileSaver) { 'use strict';
 
-  var version = '0.1.1';
+  var version = '0.1.2'; //TODO: add members https://www.kanzaki.com/docs/ical/member.html
+  //TODO: add organizerhttps://www.kanzaki.com/docs/ical/organizer.html (email only support)
+
   /**
    * Reccurence rule
    * @typedef {Object} RRule
@@ -109,6 +111,7 @@
        * @param  {string} location    Location of event
        * @param  {string} begin       Beginning date of event
        * @param  {string} stop        Ending date of event
+       * @param  {string} url			URL
        * @param  {RRule}  rrule       Reccurence rule
        * @returns {string} event
        **/
@@ -119,7 +122,8 @@
         var location = arguments.length > 3 ? arguments[3] : undefined;
         var begin = arguments.length > 4 ? arguments[4] : undefined;
         var stop = arguments.length > 5 ? arguments[5] : undefined;
-        var rrule = arguments.length > 6 ? arguments[6] : undefined;
+        var url = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+        var rrule = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
         var rruleString;
 
         if (typeof subject === 'undefined' || typeof description === 'undefined' || typeof location === 'undefined' || typeof begin === 'undefined' || typeof stop === 'undefined') {
@@ -173,7 +177,7 @@
         var start = start_year + start_month + start_day + start_time;
         var end = end_year + end_month + end_day + end_time;
         var now = now_year + now_month + now_day + now_time;
-        var Event = "\n    BEGIN:VEVENT\n    UID:".concat(UID, "@").concat(options.uidDomain, "\n    DESCRIPTION:").concat(description).concat(rruleString ? '\n' + rruleString : '', "\n    DTSTAMP;VALUE=DATE-TIME:").concat(now, ",\n    DTSTART;VALUE=DATE-TIME:").concat(start, "\n    DTEND;VALUE=DATE-TIME:").concat(end, "\n    LOCATION:").concat(location, "\n    SUMMARY;LANGUAGE=").concat(language, ":").concat(subject, "\n    END:VEVENT\n      ");
+        var Event = "\n    BEGIN:VEVENT\n    UID:".concat(UID, "@").concat(options.uidDomain, "\n    ").concat(url ? 'URL:' + url : '', "\n    DESCRIPTION:").concat(description).concat(rruleString ? '\n' + rruleString : '', "\n    DTSTAMP;VALUE=DATE-TIME:").concat(now, ",\n    DTSTART;VALUE=DATE-TIME:").concat(start, "\n    DTEND;VALUE=DATE-TIME:").concat(end, "\n    LOCATION:").concat(location, "\n    SUMMARY;LANGUAGE=").concat(language, ":").concat(subject, "\n    END:VEVENT\n      ");
         Events.push(Event);
         return Event;
       },
