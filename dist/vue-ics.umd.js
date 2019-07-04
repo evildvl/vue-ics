@@ -1,7 +1,7 @@
 /*!
  * vue-ics v0.1.0 
- * (c) 2019 
- * Released under the undefined License.
+ * (c) 2019 Stanislav Mihaylov <ceo@pepper.llc>
+ * Released under the MIT License.
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('file-saver')) :
