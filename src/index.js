@@ -1,8 +1,6 @@
 import { saveAs } from 'file-saver'
 const version = '__VERSION__'
 
-//TODO: add members https://www.kanzaki.com/docs/ical/member.html
-
 /**
  * Reccurence rule
  * @typedef {Object} RRule
