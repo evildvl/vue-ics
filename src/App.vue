@@ -3,6 +3,7 @@
     <h1>Plugin Demo</h1>
     <pre>{{ cal }}</pre>
     <a @click="save()">Download</a>
+    <a @click="remove()">Remove All Events</a>
   </div>
 </template>
 <script>
@@ -16,6 +17,10 @@ export default {
   methods: {
     save() {
       this.$ics.download('test_event')
+    },
+    remove() {
+      this.$ics.removeAllEvents();
+      this.cal = this.$ics.calendar()
     }
   },
   mounted() {
