@@ -1,6 +1,6 @@
 /*!
  * vue-ics v0.1.2 
- * (c) 2019 Stanislav Mihaylov <ceo@pepper.llc>
+ * (c) 2020 Stanislav Mihaylov <ceo@pepper.llc>
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -9,9 +9,7 @@
   (global = global || self, global.VueIcs = factory(global.fileSaver));
 }(this, function (fileSaver) { 'use strict';
 
-  var version = '0.1.2'; //TODO: add members https://www.kanzaki.com/docs/ical/member.html
-  //TODO: add organizerhttps://www.kanzaki.com/docs/ical/organizer.html (email only support)
-
+  var version = '0.1.2';
   /**
    * Reccurence rule
    * @typedef {Object} RRule
@@ -96,6 +94,12 @@
     return "\n".concat(string, "\n");
   }
 
+  var counter = 0;
+
+  function getUniqueNumber() {
+    return counter++;
+  }
+
   var install = function install(Vue) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
       uidDomain: 'evildvl',
@@ -111,7 +115,8 @@
        * @param  {string} location    Location of event
        * @param  {string} begin       Beginning date of event
        * @param  {string} stop        Ending date of event
-       * @param  {string} url			URL
+       * @param  {string} url			    URL
+       * @param  {object} organizer   Organizer
        * @param  {RRule}  rrule       Reccurence rule
        * @returns {string} event
        **/
@@ -119,11 +124,12 @@
         var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en-us';
         var subject = arguments.length > 1 ? arguments[1] : undefined;
         var description = arguments.length > 2 ? arguments[2] : undefined;
-        var location = arguments.length > 3 ? arguments[3] : undefined;
+        var location = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'none';
         var begin = arguments.length > 4 ? arguments[4] : undefined;
         var stop = arguments.length > 5 ? arguments[5] : undefined;
         var url = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-        var rrule = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+        var organizer = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+        var rrule = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
         var rruleString;
 
         if (typeof subject === 'undefined' || typeof description === 'undefined' || typeof location === 'undefined' || typeof begin === 'undefined' || typeof stop === 'undefined') {
@@ -146,7 +152,7 @@
         var start_date = new Date(begin);
         var end_date = new Date(stop);
         var now_date = new Date();
-        var UID = "".concat(now_date.getDay()).concat(now_date.getMonth()).concat(now_date.getFullYear(), "-").concat(now_date.getHours()).concat(now_date.getMinutes()).concat(now_date.getSeconds());
+        var UID = "".concat(now_date.getDay()).concat(now_date.getMonth()).concat(now_date.getFullYear(), "-").concat(now_date.getHours()).concat(now_date.getMinutes()).concat(now_date.getSeconds()).concat(getUniqueNumber());
         var start_year = "0000".concat(start_date.getFullYear().toString()).slice(-4);
         var start_month = "00".concat((start_date.getMonth() + 1).toString()).slice(-2);
         var start_day = "00".concat(start_date.getDate().toString()).slice(-2);
@@ -177,7 +183,7 @@
         var start = start_year + start_month + start_day + start_time;
         var end = end_year + end_month + end_day + end_time;
         var now = now_year + now_month + now_day + now_time;
-        var Event = "\n    BEGIN:VEVENT\n    UID:".concat(UID, "@").concat(options.uidDomain, "\n    ").concat(url ? 'URL:' + url : '', "\n    DESCRIPTION:").concat(description).concat(rruleString ? '\n' + rruleString : '', "\n    DTSTAMP;VALUE=DATE-TIME:").concat(now, ",\n    DTSTART;VALUE=DATE-TIME:").concat(start, "\n    DTEND;VALUE=DATE-TIME:").concat(end, "\n    LOCATION:").concat(location, "\n    SUMMARY;LANGUAGE=").concat(language, ":").concat(subject, "\n    END:VEVENT\n      ");
+        var Event = "\n    BEGIN:VEVENT\n    UID:".concat(UID, "@").concat(options.uidDomain, "\n    ").concat(url ? 'URL:' + url : '', "\n    DESCRIPTION:").concat(description).concat(rruleString ? '\n' + rruleString : '', "\n    DTSTAMP;VALUE=DATE-TIME:").concat(now, ",\n    DTSTART;VALUE=DATE-TIME:").concat(start, "\n    DTEND;VALUE=DATE-TIME:").concat(end, "\n    LOCATION:").concat(location, "\n    ").concat(organizer ? 'ORGANIZER;CN=' + organizer.name + ':MAILTO:' + organizer.email : '', "\n    SUMMARY;LANGUAGE=").concat(language, ":").concat(subject, "\n    END:VEVENT\n      ");
         Events.push(Event);
         return Event;
       },
@@ -188,7 +194,7 @@
        * @return {string} Calendar in iCalendar format
        */
       calendar: function calendar() {
-        return addCRLF("\n    BEGIN:VCALENDAR\n    PRODID:".concat(options.prodId, "\n    VERSION:2.0\n    ").concat(Events.join('\n'), "\n    END:VCALENDAR\n      \n      ").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
+        return addCRLF("\n    BEGIN:VCALENDAR\n    PRODID:".concat(options.prodId, "\n    VERSION:2.0\n    ").concat(Events.join('\n'), "\n    END:VCALENDAR\n\n      ").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
       },
 
       /**
@@ -197,7 +203,7 @@
        * @param {string} filename  - Name of the file without extension
        */
       download: function download(filename) {
-        var Calendar = addCRLF("\n    BEGIN:VCALENDAR\n    PRODID:".concat(options.prodId, "\n    VERSION:2.0\n    ").concat(Events.join('\n'), "\n    END:VCALENDAR\n      \n      ").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
+        var Calendar = addCRLF("\n    BEGIN:VCALENDAR\n    PRODID:".concat(options.prodId, "\n    VERSION:2.0\n    ").concat(Events.join('\n'), "\n    END:VCALENDAR\n\n      ").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
         var blob = new Blob([Calendar], {
           type: "text/x-vCalendar;charset=utf-8"
         });

@@ -82,6 +82,13 @@ function addCRLF(string) {
   return `\n${string}\n`
 }
 
+
+var counter = 0;
+
+function getUniqueNumber() {
+  return counter++;
+}
+
 const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
   Vue.prototype.$ics = {
     /**
@@ -122,7 +129,7 @@ const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
       let start_date = new Date(begin);
       let end_date = new Date(stop);
       let now_date = new Date();
-      const UID = `${now_date.getDay()}${now_date.getMonth()}${now_date.getFullYear()}-${now_date.getHours()}${now_date.getMinutes()}${now_date.getSeconds()}`
+      const UID = `${now_date.getDay()}${now_date.getMonth()}${now_date.getFullYear()}-${now_date.getHours()}${now_date.getMinutes()}${now_date.getSeconds()}${getUniqueNumber()}`
 
       let start_year = (`0000${(start_date.getFullYear().toString())}`).slice(-4)
       let start_month = (`00${((start_date.getMonth() + 1).toString())}`).slice(-2)
@@ -185,7 +192,7 @@ const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
     VERSION:2.0
     ${Events.join('\n')}
     END:VCALENDAR
-      
+
       `.replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''))
     },
     /**
@@ -200,7 +207,7 @@ const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
     VERSION:2.0
     ${Events.join('\n')}
     END:VCALENDAR
-      
+
       `.replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''))
       var blob = new Blob([Calendar], {type: "text/x-vCalendar;charset=utf-8"});
       saveAs(blob, `${filename}.ics`);
