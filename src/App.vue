@@ -36,7 +36,7 @@ export default {
       until: until,
       interval: 1
     }
-    this.$ics.addEvent('ru-ru', 'Test event subject', 'Test event description', 'online', start, end, "http://test.com" ,rrule)
+    this.$ics.addEvent('ru-ru', 'Test event subject', 'Test event description', 'online', start, end, "http://test.com", null, rrule)
     this.cal = this.$ics.calendar()
   }
 }
