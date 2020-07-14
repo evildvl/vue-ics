@@ -1,7 +1,7 @@
 {
   "name": "vue-ics",
   "description": "Vue.js plugin for generating ICalendar (.ics) files.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Stanislav Mihaylov <ceo@pepper.llc>",
   "license": "MIT",
   "repository": {
