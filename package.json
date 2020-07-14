@@ -42,7 +42,7 @@
     "eslint": "5.16.0",
     "eslint-plugin-vue": "5.2.3",
     "vue": "2.6.10",
-    "vue-cli-plugin-p11n": "0.3.0",
+    "vue-cli-plugin-p11n": "0.4.0",
     "vue-template-compiler": "2.6.10"
   },
   "eslintConfig": {
