@@ -5,6 +5,8 @@
 
 # vue-ics
 
+Vue.js plugin for generating ICalendar (.ics) files.
+
 ## Installation
 
 ##### NPM
