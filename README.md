@@ -1,4 +1,7 @@
 [![npm version](https://badge.fury.io/js/vue-ics.svg)](https://badge.fury.io/js/vue-ics)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/evildvl/vue-ics.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/evildvl/vue-ics/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/evildvl/vue-ics.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/evildvl/vue-ics/context:javascript)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 # vue-ics
 
