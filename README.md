@@ -54,7 +54,7 @@ Vue.use(ICS, options)
 {RRule}  rrule       - Reccurence rule (optional)
 
 ```javascript
-this.$ics.addEvent(language, subject, description, location, begin, stop, url, rrule)
+this.$ics.addEvent(language, subject, description, location, begin, stop, url, organizer, rrule)
 ```
 You can add one or more events.
 
