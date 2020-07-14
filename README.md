@@ -45,6 +45,12 @@ Vue.use(ICS, options)
 
 {string} url		 - URL (optional)
 
+{object} organizer   - Organizer
+
+  {string} name - Organizer name
+  
+  {string} email - Organizer email
+
 {RRule}  rrule       - Reccurence rule (optional)
 
 ```javascript
