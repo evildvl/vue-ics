@@ -30,7 +30,7 @@
     "src"
   ],
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.0.0",
     "file-saver": "^2.0.2"
   },
   "devDependencies": {
