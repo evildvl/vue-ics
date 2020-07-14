@@ -1,7 +1,7 @@
 {
   "name": "vue-ics",
   "description": "Vue.js plugin for generating ICalendar (.ics) files.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Stanislav Mihaylov <ceo@pepper.llc>",
   "license": "MIT",
   "repository": {
@@ -16,7 +16,7 @@
     "docs": "npm run docs:serve",
     "docs:build": "vue-cli-service docs --mode build",
     "docs:serve": "vue-cli-service docs --mode serve",
-    "prepublish": "vue-cli-service lint && vue-cli-service docs --mode build && vue-cli-service build",
+    "prepublish": "vue-cli-service lint && vue-cli-service build",
     "start": "vue-cli-service serve"
   },
   "main": "dist/vue-ics.common.js",
