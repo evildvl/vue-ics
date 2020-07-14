@@ -105,6 +105,10 @@ const install = (Vue, options = {uidDomain: 'evildvl', prodId: 'vueICS'}) => {
      * @param  {RRule}  rrule       Reccurence rule
      * @returns {string} event
      **/
+
+    removeAllEvents: () => {
+      Events = [];
+    },
     addEvent: (language = 'en-us', subject, description, location = 'none', begin, stop, url = null, organizer = null, rrule = null) => {
       let rruleString
 

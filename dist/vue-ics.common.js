@@ -118,6 +118,9 @@ var install = function install(Vue) {
      * @param  {RRule}  rrule       Reccurence rule
      * @returns {string} event
      **/
+    removeAllEvents: function removeAllEvents() {
+      Events = [];
+    },
     addEvent: function addEvent() {
       var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en-us';
       var subject = arguments.length > 1 ? arguments[1] : undefined;
