@@ -91,7 +91,7 @@ this.$ics.removeAllEvents()
 this.$ics.calendar()
 ```
 
-##Download calendar file
+## Download calendar file
 
 ```javascript
 this.$ics.download(fileName)
