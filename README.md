@@ -29,6 +29,7 @@ Vue.use(ICS, { options })
 { uidDomain: string, prodId: string }
 
 uidDomain – Your domain
+
 prodId - Product ID
 
 ## Create event
