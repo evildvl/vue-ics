@@ -22,13 +22,14 @@ npm install vue-ics --save
 import Vue from 'vue'
 import ICS from 'vue-ics'
 
-Vue.use(ICS, options)
+Vue.use(ICS, { options })
 ```
 
 ## Initialising options (optional)
-{string} uidDomain - Your domain
+{uidDomain: string, prodId: string}
 
-{string} prodId - Product ID
+uidDomain – Your domain
+prodId - Product ID
 
 ## Create event
 
