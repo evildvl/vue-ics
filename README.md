@@ -25,44 +25,48 @@ import ICS from 'vue-ics'
 Vue.use(ICS, { options })
 ```
 
-## Initialising options (optional)
-{ uidDomain: string, prodId: string }
+## Global options (optional)
+{ `uidDomain`: *string*, `prodId`: *string* }
 
-uidDomain – Your domain
+`uidDomain` – Your domain
 
-prodId - Product ID
+`prodId` - Product ID
 
-## Create event
-
-{string} language    - Language in format en-us (default)
-
-{string} subject     - Subject/Title of event
-
-{string} description - Description of event
-
-{string} location    - Location of event
-
-{string} begin       - Beginning date of event
-
-{string} stop        - Ending date of event
-
-{string} url		 - URL (optional)
-
-{object} organizer   - Organizer
-
-  {string} name - Organizer name
-  
-  {string} email - Organizer email
-
-{RRule}  rrule       - Reccurence rule (optional)
+## Initializing
+You can add one or more events.
 
 ```javascript
 this.$ics.addEvent(language, subject, description, location, begin, stop, url, organizer, rrule)
 ```
-You can add one or more events.
+
+### Parameters
+
+`language` *string* - Language in format en-us (default)
+
+`subject` *string* - Subject/Title of event
+
+`description` *string* - Description of event
+
+`location` *string* - Location of event
+
+ `begin` *string | Date* - Beginning date of event. Date must match `Date()` format.
+ 
+ `stop` *string | Date* - Ending date of event. Date must match `Date()` format. Note: make sure to provide an ending date to display event correctly in a calendar
+
+`url` *string* - URL (optional)
+
+`organizer` *object* { `name`: *string*, `email`: *string* }
+ 
+`name` – Name of organizer
+ 
+`email` – E-mail of organizer
+
+`rrule` *object* - Reccurence rule (optional)
+
 
 ## Reccurence rule
-You can add recurrence rule for your event. Event will be repeat as you want.
+You can add a recurrence rule for your event. Event will be repeated as often as you want.
+
 ```javascript
 const rrule = {
    freq: 'WEEKLY',
@@ -71,15 +75,15 @@ const rrule = {
 }
 ```
 
-Parameters:
+### Parameters
 
-{string} freq - Required. The frequency of event recurrence. Can be DAILY, WEEKLY, MONTHLY, or YEARLY.
+`freq` *string* - Required. The frequency of event recurrence. Can be DAILY, WEEKLY, MONTHLY, or YEARLY.
 
-{string | number | Date} until - date stringA date string representing the date on which to end repitition. Must be friendly to Date()
+`until` *string | number | Date* - A date string representing the date on which to end repetition. Date must match `Date() format.
 
-{number} interval - The interval of freq to recur at. For example, if freq is WEEKLY and interval is 2, the event will repeat every 2 weeks
+`interval` *number* - The interval of freq to recurr at. For example, if freq is `WEEKLY` and interval is `2`, the event will repeat every 2 weeks
 
-{array} byday - Which days of the week the event is to occur. An array containing any of SU, MO, TU, WE, TH, FR, SA
+`byday` *array* - Which days of the week the event is to occur. An array containing any of SU, MO, TU, WE, TH, FR, SA
 
 ## Remove all events from the calendar
 
@@ -93,10 +97,10 @@ this.$ics.removeAllEvents()
 this.$ics.calendar()
 ```
 
-##Download calendar file
+## Download calendar file
 
 ```javascript
 this.$ics.download(fileName)
 ```
 
-{string} fileName - name of file without extension (will be *.ics)
+`fileName` *string* - name of file without extension (will be *.ics)
