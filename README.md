@@ -26,7 +26,7 @@ Vue.use(ICS, { options })
 ```
 
 ## Initialising options (optional)
-{uidDomain: string, prodId: string}
+{ uidDomain: string, prodId: string }
 
 uidDomain – Your domain
 prodId - Product ID
