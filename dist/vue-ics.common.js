@@ -1,13 +1,13 @@
 /*!
- * vue-ics v0.1.3 
- * (c) 2020 Stanislav Mihaylov <ceo@pepper.llc>
+ * vue-ics v0.1.5 
+ * (c) 2022 Inventive Group
  * Released under the MIT License.
  */
 'use strict';
 
 var fileSaver = require('file-saver');
 
-var version = '0.1.3';
+var version = '0.1.5';
 /**
  * Reccurence rule
  * @typedef {Object} RRule
@@ -81,7 +81,7 @@ function validateRepeatRule(rrule) {
   return counter === 0;
 }
 /**
- * Helper function for appending CRLF at start and end of file according to RFC rules.
+ * Helper function for appending CRLF at end of file according to RFC rules.
  * @function
  * @param {string} string - iCalendar source string
  * @return {string}
@@ -89,7 +89,7 @@ function validateRepeatRule(rrule) {
 
 
 function addCRLF(string) {
-  return "\n".concat(string, "\n");
+  return "".concat(string, "\n");
 }
 
 var counter = 0;
@@ -184,7 +184,7 @@ var install = function install(Vue) {
       var start = start_year + start_month + start_day + start_time;
       var end = end_year + end_month + end_day + end_time;
       var now = now_year + now_month + now_day + now_time;
-      var Event = "\n    BEGIN:VEVENT\n    UID:".concat(UID, "@").concat(options.uidDomain, "\n    ").concat(url ? 'URL:' + url : '', "\n    DESCRIPTION:").concat(description).concat(rruleString ? '\n' + rruleString : '', "\n    DTSTAMP;VALUE=DATE-TIME:").concat(now, ",\n    DTSTART;VALUE=DATE-TIME:").concat(start, "\n    DTEND;VALUE=DATE-TIME:").concat(end, "\n    LOCATION:").concat(location, "\n    ").concat(organizer ? 'ORGANIZER;CN=' + organizer.name + ':MAILTO:' + organizer.email : '', "\n    SUMMARY;LANGUAGE=").concat(language, ":").concat(subject, "\n    END:VEVENT\n      ");
+      var Event = "BEGIN:VEVENT\n        UID:".concat(UID, "@").concat(options.uidDomain, "\n        ").concat(url ? 'URL:' + url : '', "\n        DESCRIPTION:").concat(description).concat(rruleString ? '\n' + rruleString : '', "\n        DTSTAMP;VALUE=DATE-TIME:").concat(now, ",\n        DTSTART;VALUE=DATE-TIME:").concat(start, "\n        DTEND;VALUE=DATE-TIME:").concat(end, "\n        LOCATION:").concat(location, "\n        ").concat(organizer ? 'ORGANIZER;CN=' + organizer.name + ':MAILTO:' + organizer.email : '', "\n        SUMMARY;LANGUAGE=").concat(language, ":").concat(subject, "\n        END:VEVENT\n      ");
       Events.push(Event);
       return Event;
     },
@@ -195,7 +195,7 @@ var install = function install(Vue) {
      * @return {string} Calendar in iCalendar format
      */
     calendar: function calendar() {
-      return addCRLF("\n    BEGIN:VCALENDAR\n    PRODID:".concat(options.prodId, "\n    VERSION:2.0\n    ").concat(Events.join('\n'), "\n    END:VCALENDAR\n\n      ").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
+      return addCRLF("BEGIN:VCALENDAR\n        PRODID:".concat(options.prodId, "\n        VERSION:2.0\n        ").concat(Events.join('\n'), "\n        END:VCALENDAR").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
     },
 
     /**
@@ -204,7 +204,7 @@ var install = function install(Vue) {
      * @param {string} filename  - Name of the file without extension
      */
     download: function download(filename) {
-      var Calendar = addCRLF("\n    BEGIN:VCALENDAR\n    PRODID:".concat(options.prodId, "\n    VERSION:2.0\n    ").concat(Events.join('\n'), "\n    END:VCALENDAR\n\n      ").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
+      var Calendar = addCRLF("BEGIN:VCALENDAR\n        PRODID:".concat(options.prodId, "\n        VERSION:2.0\n        ").concat(Events.join('\n'), "\n        END:VCALENDAR").replace(/^\s*[\r\n]/gm, "").replace(/^\s+/gm, ''));
       var blob = new Blob([Calendar], {
         type: "text/x-vCalendar;charset=utf-8"
       });

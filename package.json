@@ -1,12 +1,12 @@
 {
-  "name": "vue-ics",
+  "name": "@inventivegroup/vue-ics",
   "description": "Vue.js plugin for generating ICalendar (.ics) files.",
-  "version": "0.1.4",
-  "author": "Stanislav Mihaylov <ceo@pepper.llc>",
+  "version": "0.1.5",
+  "author": "Inventive Group",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/evildvl/vue-ics.git"
+    "url": "https://github.com/inventivegroup/vue-ics.git"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -39,10 +39,10 @@
     "@vue/cli-service": "^5.0.4",
     "babel-eslint": "10.1.0",
     "cz-conventional-changelog": "^3.0.1",
-    "eslint": "7.7.0",
-    "eslint-plugin-vue": "6.2.2",
+    "eslint": "7.32.0",
+    "eslint-plugin-vue": "7.20.0",
     "vue": "2.6.11",
-    "vue-cli-plugin-p11n": "^0.0.2",
+    "vue-cli-plugin-p11n": "^0.4.0",
     "vue-template-compiler": "2.6.11"
   },
   "eslintConfig": {
