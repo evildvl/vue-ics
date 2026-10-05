@@ -34,9 +34,9 @@
     "file-saver": "^2.0.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.3",
-    "@vue/cli-plugin-eslint": "4.5.3",
-    "@vue/cli-service": "4.5.3",
+    "@vue/cli-plugin-babel": "4.5.19",
+    "@vue/cli-plugin-eslint": "4.5.19",
+    "@vue/cli-service": "4.5.19",
     "babel-eslint": "10.1.0",
     "cz-conventional-changelog": "3.2.0",
     "eslint": "7.7.0",
